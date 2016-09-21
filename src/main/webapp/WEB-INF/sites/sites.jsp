@@ -68,7 +68,7 @@ $(function(){
 				<li><i class="icon-fenlei font12"></i><a href="#">全部商品</a></li>
 				<li><i class="icon-xuexi font14"></i><a href="/academies/">学术课题</a></li>
 				<li><i class="icon-jifen font14"></i><a href="jifen.html">积分商城</a></li>
-				<li><i class="icon-wodedingdan font12"></i><a href="dingdan.html">我的订单</a></li>
+				<li><i class="icon-wodedingdan font12"></i><a href="/spring1/orders">我的订单</a></li>
 				<li><i class="icon-gouwuche font12"></i><a href="gou.html">购物 车</a></li>
 				<li><i class="icon-gerenzhongxin font12"></i><a href="/spring1/profile/">个人中心</a></li>
 			</ul>
