@@ -13,7 +13,7 @@ import com.wisesscu.service.IUserService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	//@Resource
+	@Resource
 	private IUserService userService;
 
 	@RequestMapping("/showUser")

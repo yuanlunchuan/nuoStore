@@ -8,7 +8,7 @@ import com.wisesscu.service.IUserService;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
-	//@Resource
+	@Resource
 	private IUserDao userDao;
 
 	public User getUserById(int userId) {
