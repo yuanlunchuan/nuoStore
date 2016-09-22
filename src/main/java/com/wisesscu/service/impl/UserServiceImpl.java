@@ -31,4 +31,7 @@ public class UserServiceImpl implements IUserService {
 	public int update(User user){
 		return this.userDao.updateByPrimaryKeySelective(user);
 	}
+	public ArrayList<User> getUserByName(String userName){
+		return this.userDao.getUserByName(userName);
+	}
 }

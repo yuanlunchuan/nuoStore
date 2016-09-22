@@ -10,4 +10,5 @@ public interface IUserService {
 	public ArrayList<User> all();
 	public int destroy(int userId);
 	public int update(User user);
+	public ArrayList<User> getUserByName(String userName);
 }

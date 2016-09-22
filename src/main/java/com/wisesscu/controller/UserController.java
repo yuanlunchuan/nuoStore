@@ -77,6 +77,7 @@ public class UserController {
 		this.userService.destroy(Integer.parseInt(userId));
 		return "redirect:/users/";
 	}
+
 	@RequestMapping(value="/{userId}", method=RequestMethod.POST)
 	public String update(ModelMap model,
 			@PathVariable int userId,

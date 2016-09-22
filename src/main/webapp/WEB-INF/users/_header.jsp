@@ -17,9 +17,9 @@
         <li><a href="/spring1/users/new">新增</a></li>
         <li><a href="/spring1/users/">列表</a></li>
       </ul>
-      <form class="navbar-form navbar-right" role="search">
+      <form class="navbar-form navbar-right" role="search" method="get" action="/spring1/users/">
         <div class="form-group">
-          <input class="form-control" placeholder="Search" type="text">
+          <input class="form-control" placeholder="请输入用户名" type="text" name="userName">
         </div>
         <button type="submit" class="btn btn-default">查询</button>
       </form>

@@ -23,6 +23,13 @@
     <include refid="Base_Column_List" />
     from user_t
   </select>
+
+  <select id="getUserByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_t
+    where user_name=#{userName}
+  </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_t
