@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,57 +21,23 @@
 		<table class="table table-striped table-hover ">
 		  <thead>
 		    <tr>
-		      <th>#</th>
-		      <th>Column heading</th>
-		      <th>Column heading</th>
-		      <th>Column heading</th>
+		      <th>用户id</th>
+		      <th>用户名</th>
+		      <th>年龄</th>
+		      <th>操作</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr>
-		      <td>1</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		    </tr>
-		    <tr>
-		      <td>2</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		    </tr>
-		    <tr class="info">
-		      <td>3</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		    </tr>
-		    <tr class="success">
-		      <td>4</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		    </tr>
-		    <tr class="danger">
-		      <td>5</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		    </tr>
-		    <tr class="warning">
-		      <td>6</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		    </tr>
-		    <tr class="active">
-		      <td>7</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
-		    </tr>
+		    <c:forEach var="user" items="${users}">
+              <tr>
+                <td>${user.id}</td>
+                <td>${user.userName}</td>
+                <td>${user.age }</td>
+                <td><a href="">编辑</a>/<a href="">删除</a></td>
+              </tr>
+            </c:forEach>
 		  </tbody>
-		</table> 
+		</table>
       </div>
     </div>
   </div>

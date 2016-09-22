@@ -1,5 +1,7 @@
 package com.wisesscu.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,9 @@ public class UserController {
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index(ModelMap model){
-		System.out.println("run in index method");
+		ArrayList<User> users = new ArrayList<User>();
+		users = this.userService.all();
+		model.addAttribute("users", users);
 		return "users/index";
 	}
 }

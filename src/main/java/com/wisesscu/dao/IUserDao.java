@@ -1,5 +1,7 @@
 package com.wisesscu.dao;
 
+import java.util.ArrayList;
+
 import com.wisesscu.pojo.User;
 
 public interface IUserDao {
@@ -14,4 +16,6 @@ public interface IUserDao {
 	int updateByPrimaryKeySelective(User record);
 
 	int updateByPrimaryKey(User record);
+
+	ArrayList<User> all();
 }

@@ -1,5 +1,7 @@
 package com.wisesscu.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,12 @@ public class UserServiceImpl implements IUserService {
 	public User getUserById(int userId) {
 		return this.userDao.selectByPrimaryKey(userId);
 	}
-	
+
 	public int save(User user){
 		return this.userDao.insert(user);
+	}
+
+	public ArrayList<User> all() {
+		return this.userDao.all();
 	}
 }
