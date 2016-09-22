@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,7 @@ public class UserController {
 		return "users/new";
 	}
 
-	@RequestMapping(value = "create", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String create(@RequestParam("userName") String userName, 
 			@RequestParam("password") String password,
 			@RequestParam("age") int age,
@@ -47,14 +48,45 @@ public class UserController {
 		this.userService.save(user);
 		model.addAttribute("userName", userName);
 
-		return "redirect:index";
+		return "redirect:/users/";
 	}
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(ModelMap model){
 		ArrayList<User> users = new ArrayList<User>();
 		users = this.userService.all();
 		model.addAttribute("users", users);
 		return "users/index";
+	}
+
+	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	public String show(ModelMap model, @PathVariable String userId){
+		model.addAttribute("user", this.userService.getUserById(Integer.parseInt(userId)));
+		return "users/show";
+	}
+
+	@RequestMapping(value="/{userId}/edit", method=RequestMethod.GET)
+	public String edit(ModelMap model, @PathVariable String userId){
+        model.addAttribute("user", this.userService.getUserById(Integer.parseInt(userId)));
+		return "users/edit";
+	}
+
+	@RequestMapping(value = "/{userId}", method = RequestMethod.POST, params = "_method=DELETE")
+	public String destroy(ModelMap model,
+			@PathVariable String userId){
+		this.userService.destroy(Integer.parseInt(userId));
+		return "redirect:/users/";
+	}
+	@RequestMapping(value="/{userId}", method=RequestMethod.POST)
+	public String update(ModelMap model,
+			@PathVariable int userId,
+			@RequestParam("userName") String userName,
+			@RequestParam("age") int age){
+		User user = new User();
+		user.setAge(age);
+		user.setUserName(userName);
+		user.setId(userId);
+		this.userService.update(user);
+		return "redirect:/users/";
 	}
 }

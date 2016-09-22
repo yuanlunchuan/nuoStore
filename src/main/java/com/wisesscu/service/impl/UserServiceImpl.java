@@ -25,4 +25,10 @@ public class UserServiceImpl implements IUserService {
 	public ArrayList<User> all() {
 		return this.userDao.all();
 	}
+	public int destroy(int userId){
+		return this.userDao.deleteByPrimaryKey(userId);
+	}
+	public int update(User user){
+		return this.userDao.updateByPrimaryKeySelective(user);
+	}
 }
