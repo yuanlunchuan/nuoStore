@@ -35,12 +35,15 @@ public class UserController {
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(@RequestParam("userName") String userName, 
 			@RequestParam("password") String password,
-			@RequestParam("age") int age){
+			@RequestParam("age") int age,
+			ModelMap model){
+
 		User user = new User();
 		user.setUserName(userName);
 		user.setPassword(password);
 		user.setAge(age);
 		this.userService.save(user);
+		model.addAttribute("userName", userName);
 
 		return "redirect:index";
 	}
