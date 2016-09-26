@@ -2,8 +2,11 @@ package com.wisesscu.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,11 +25,12 @@ public class SessionsController {
 	}
 
 	@RequestMapping("/")
-	public String create(@RequestParam("userName") String userName, @RequestParam("password") String password) {
+	public String create(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession httpSession) {
 		ArrayList<User> users = new ArrayList<User>();
 		users = this.userService.getUserByName(userName);
 		if (users.size() > 0) {
-			return "redirect:/users/";
+			httpSession.setAttribute("userId", users.get(0).getId());
+			return "redirect:/sites";
 		} else {
 			return "redirect:/sessions/new";
 		}

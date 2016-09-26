@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -40,7 +41,14 @@ $(function(){
 				<img src="/spring1/static/images/logo.png" width="104" height="60" alt="" />
 			</div>
 			<div class="user">
-				<a href="#">登陆</a>|<a href="#">注册</a>
+			  <c:choose>
+			    <c:when test="${ sessionScope.userId>0}">
+			            欢迎您<a href="">${user.userName}</a>
+			    </c:when>
+			    <c:otherwise>
+				  <a href="/spring1/sessions/new">登陆</a>|<a href="#">注册</a>
+				</c:otherwise>
+			  </c:choose>
 			</div>
 		</div>
 
@@ -69,7 +77,7 @@ $(function(){
 				<li><i class="icon-xuexi font14"></i><a href="/academies/">学术课题</a></li>
 				<li><i class="icon-jifen font14"></i><a href="jifen.html">积分商城</a></li>
 				<li><i class="icon-wodedingdan font12"></i><a href="/spring1/orders">我的订单</a></li>
-				<li><i class="icon-gouwuche font12"></i><a href="gou.html">购物 车</a></li>
+				<li><i class="icon-gouwuche font12"></i><a href="gou.html">购物车</a></li>
 				<li><i class="icon-gerenzhongxin font12"></i><a href="/spring1/profile/">个人中心</a></li>
 			</ul>
 		</div>

@@ -1,42 +1,35 @@
 package com.wisesscu.controller;
 
 import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.wisesscu.pojo.User;
 import com.wisesscu.service.IUserService;
 
-@Controller
+@RestController
 @RequestMapping("/users")
 public class UserController {
 	@Autowired
 	private IUserService userService;
 
-	@RequestMapping("/showUser")
-	public String toIndex(HttpServletRequest request,Model model){
-		int userId = Integer.parseInt(request.getParameter("id"));
-		User user = this.userService.getUserById(userId);
-		model.addAttribute("user", user);
-		return "showUser";
-	}
-
 	@RequestMapping("/new")
-	public String newPage(ModelMap model){
-		return "users/new";
+	public ModelAndView newPage(ModelMap model){
+		return new ModelAndView("users/new");
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String create(@RequestParam("userName") String userName, 
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView create(@RequestParam("userName") String userName, 
 			@RequestParam("password") String password,
 			@RequestParam("age") int age,
 			ModelMap model){
@@ -48,38 +41,48 @@ public class UserController {
 		this.userService.save(user);
 		model.addAttribute("userName", userName);
 
-		return "redirect:/users/";
+		return new ModelAndView("redirect:/users/");
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(ModelMap model){
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView index(ModelMap model){
 		ArrayList<User> users = new ArrayList<User>();
 		users = this.userService.all();
 		model.addAttribute("users", users);
-		return "users/index";
+		return new ModelAndView("users/index");
 	}
 
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseEntity<List<User>> listAllUsers() {
+        List<User> users = this.userService.all();
+        if(users.isEmpty()){
+            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+    }  
+
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public String show(ModelMap model, @PathVariable String userId){
+	public ModelAndView show(ModelMap model, @PathVariable String userId){
 		model.addAttribute("user", this.userService.getUserById(Integer.parseInt(userId)));
-		return "users/show";
+
+		return new ModelAndView("users/show");
 	}
 
 	@RequestMapping(value="/{userId}/edit", method=RequestMethod.GET)
-	public String edit(ModelMap model, @PathVariable String userId){
+	public ModelAndView edit(ModelMap model, @PathVariable String userId){
         model.addAttribute("user", this.userService.getUserById(Integer.parseInt(userId)));
-		return "users/edit";
+		return new ModelAndView("users/edit");
 	}
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.POST, params = "_method=DELETE")
-	public String destroy(ModelMap model,
+	public ModelAndView destroy(ModelMap model,
 			@PathVariable String userId){
 		this.userService.destroy(Integer.parseInt(userId));
-		return "redirect:/users/";
+		return new ModelAndView("redirect:/users/");
 	}
 
 	@RequestMapping(value="/{userId}", method=RequestMethod.POST)
-	public String update(ModelMap model,
+	public ModelAndView update(ModelMap model,
 			@PathVariable int userId,
 			@RequestParam("userName") String userName,
 			@RequestParam("age") int age){
@@ -88,6 +91,6 @@ public class UserController {
 		user.setUserName(userName);
 		user.setId(userId);
 		this.userService.update(user);
-		return "redirect:/users/";
+		return new ModelAndView("redirect:/users/");
 	}
 }

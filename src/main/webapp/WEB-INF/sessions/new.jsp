@@ -13,7 +13,7 @@
       <div class="col-md-6 col-md-offset-3">
 		<div class="panel panel-primary">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">管理员登录</h3>
+		    <h3 class="panel-title">用户登录</h3>
 		  </div>
 		  <div class="panel-body">
 		    <form action="/spring1/sessions/" method="post" class="form-horizontal">
