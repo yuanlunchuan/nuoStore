@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String baseUrl = request.getContextPath(); %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -74,7 +75,7 @@ $(function(){
 		<div class="nav">
 			<ul>
 				<li><i class="icon-fenlei font12"></i><a href="#">全部商品</a></li>
-				<li><i class="icon-xuexi font14"></i><a href="/academies/">学术课题</a></li>
+				<li><i class="icon-xuexi font14"></i><a href="<%=baseUrl %>/academies/">学术课题</a></li>
 				<li><i class="icon-jifen font14"></i><a href="jifen.html">积分商城</a></li>
 				<li><i class="icon-wodedingdan font12"></i><a href="/spring1/orders">我的订单</a></li>
 				<li><i class="icon-gouwuche font12"></i><a href="gou.html">购物车</a></li>
