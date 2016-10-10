@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<% String baseUrl = request.getContextPath(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,8 +15,7 @@
 <body>
 	<div class="container">
 		<div class="nav-header">
-			<i><a href="my.html">&#xe602;</a></i>我的订单<em><a
-				href="index.html">&#xe603;</a></em>
+		<i><a href="<%=baseUrl %>/sites">&#xe602;</a></i>我的订单<em><a href="<%=baseUrl %>/profile">&#xe603;</a></em>
 		</div>
 
 		<div class="dan-menu">

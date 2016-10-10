@@ -74,7 +74,7 @@ $(function(){
 
 		<div class="nav">
 			<ul>
-				<li><i class="icon-fenlei font12"></i><a href="#">全部商品</a></li>
+				<li><i class="icon-fenlei font12"></i><a href="<%=baseUrl%>/goods">全部商品</a></li>
 				<li><i class="icon-xuexi font14"></i><a href="<%=baseUrl %>/academies/">学术课题</a></li>
 				<li><i class="icon-jifen font14"></i><a href="jifen.html">积分商城</a></li>
 				<li><i class="icon-wodedingdan font12"></i><a href="/spring1/orders">我的订单</a></li>

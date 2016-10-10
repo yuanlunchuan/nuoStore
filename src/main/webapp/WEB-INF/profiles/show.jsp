@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%
+	String baseUrl = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,19 +10,22 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>诺利康</title>
-<link href="/spring1/static/css/master.css" rel="stylesheet" type="text/css">
+<link href="<%=baseUrl%>/static/css/master.css" rel="stylesheet"
+	type="text/css">
 
 </head>
 
 <body>
 	<div class="container">
 		<div class="nav-header">
-			<i><a href="index.html">&#xe602;</a></i>个人中心<em><a href="/spring1/sites/">&#xe603;</a></em>
+			<i><a href="<%=baseUrl%>/sites">&#xe602;</a></i>个人中心<em><a
+				href="<%=baseUrl%>/profile">&#xe603;</a></em>
 		</div>
 		<div class="user-my">
 			<div class="my-pic">
 				<div class="pic-t">
-					<img src="/spring1/static/images/6.jpg" width="1024" height="1024" alt="" />
+					<img src="<%=baseUrl%>/static/images/6.jpg" width="1024"
+						height="1024" alt="" />
 				</div>
 				<div class="int-zt">
 					<strong>水果派派</strong>
