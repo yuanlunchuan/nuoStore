@@ -18,7 +18,6 @@ public class GoodsController {
 
 	@RequestMapping(value="/{goodId}", method=RequestMethod.GET)
 	public ModelAndView show(@PathVariable int goodId, ModelMap model){
-		System.out.println("-------goodId: "+goodId);
 		return new ModelAndView("goods/show");
 	}
 }
