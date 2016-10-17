@@ -38,7 +38,6 @@ public class UserController {
 		user.setAge(age);
 		this.userService.save(user);
 		model.addAttribute("userName", userName);
-		
 		return new ModelAndView("redirect:/users/");
 	}
 	
