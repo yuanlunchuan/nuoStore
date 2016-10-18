@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-   用户名为：${user.userName}
+   <h1>Message : ${message}</h1>
 </body>
 </html>
