@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import com.wisesscu.pojo.User;
 
 public interface IUserService {
-	public User getUserById(int userId);
-	public int save(User user);
-	public ArrayList<User> all();
-	public int destroy(int userId);
-	public int update(User user);
-	public ArrayList<User> getUserByName(String userName);
+	User getUserById(int userId);
+	int save(User user);
+	ArrayList<User> all();
+	int destroy(int userId);
+	int update(User user);
+	ArrayList<User> getUserByName(String userName);
 }

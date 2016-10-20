@@ -15,7 +15,7 @@ public class HelloController {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Hello World");
 		model.addObject("message", "这是一个欢迎页面!");
-		model.setViewName("hello");
+		model.setViewName("security/hello");
 		return model;
 		
 	}
@@ -26,7 +26,7 @@ public class HelloController {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Hello World");
 		model.addObject("message", "这是一个安全被保护的页面!");
-		model.setViewName("admin");
+		model.setViewName("security/admin");
 		
 		return model;
 		
@@ -45,7 +45,7 @@ public class HelloController {
 		if (logout != null) {
 			model.addObject("msg", "您已成功注销系统.");
 		}
-		model.setViewName("login");
+		model.setViewName("security/login");
 		
 		return model;
 		
