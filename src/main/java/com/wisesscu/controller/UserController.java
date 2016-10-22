@@ -32,11 +32,6 @@ public class UserController {
 	public ModelAndView create(@RequestParam("userName") String userName, @RequestParam("password") String password,
 	    @RequestParam("age") int age, ModelMap model) {
 		
-		User user = new User();
-		user.setUserName(userName);
-		user.setPassword(password);
-		user.setAge(age);
-		this.userService.save(user);
 		model.addAttribute("userName", userName);
 		return new ModelAndView("redirect:/users/");
 	}
@@ -81,8 +76,6 @@ public class UserController {
 	public ModelAndView update(ModelMap model, @PathVariable int userId, @RequestParam("userName") String userName,
 	    @RequestParam("age") int age) {
 		User user = new User();
-		user.setAge(age);
-		user.setUserName(userName);
 		user.setId(userId);
 		this.userService.update(user);
 		return new ModelAndView("redirect:/users/");
