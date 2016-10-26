@@ -11,4 +11,9 @@ public class AcademiesController {
 	public String index(ModelMap model) {
 		return "academies/index";
 	}
+        
+        @RequestMapping("new")
+        public String newPage(ModelMap model){
+               return "academies/new";
+        }
 }
