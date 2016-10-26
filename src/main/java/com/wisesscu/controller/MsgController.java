@@ -68,7 +68,6 @@ public class MsgController {
 	// 跳转到发布广播页面
 	@RequestMapping(value = "broadcast", method = RequestMethod.GET)
 	public ModelAndView broadcast() {
-		System.out.println("---------line 65------");
 		return new ModelAndView("websocket/broadcast");
 	}
 	
@@ -84,5 +83,4 @@ public class MsgController {
 		msg.setText(text);
 		handler.broadcast(new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
 	}
-	
 }

@@ -18,12 +18,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.wisesscu.entity.Message;
 
-/**
- * Socket处理器
- * 
- * @author Goofy
- * @Date 2015年6月11日 下午1:19:50
- */
 @Component
 public class MyWebSocketHandler implements WebSocketHandler {
 	public static final Map<Long, WebSocketSession> userSocketSessionMap;
@@ -127,19 +121,11 @@ public class MyWebSocketHandler implements WebSocketHandler {
 			
 		}
 	}
-	
-	/**
-	 * 给某个用户发送消息
-	 * 
-	 * @param userName
-	 * @param message
-	 * @throws IOException
-	 */
+
 	public void sendMessageToUser(Long uid, TextMessage message) throws IOException {
 		WebSocketSession session = userSocketSessionMap.get(uid);
 		if (session != null && session.isOpen()) {
 			session.sendMessage(message);
 		}
 	}
-	
 }

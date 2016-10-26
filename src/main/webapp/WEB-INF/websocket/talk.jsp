@@ -212,13 +212,13 @@ input[type=button] {
 				 if(window.event){
 					 code = window.event.keyCode; // IE
 				 }else{
-					 code = e.which; // Firefox
+					 code = event.which; // Firefox
 				 }
 				if(code==13){ 
 					sendMsg();            
 				}
 			}
-			
+
 			function clearAll(){
 				$("#content").empty();
 			}
