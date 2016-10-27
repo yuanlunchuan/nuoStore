@@ -11,8 +11,8 @@ import com.wisesscu.pojo.Role;
 /**
  * role DAO
  * 
- * 椤圭洰鍚嶇О锛歜ase_spring_framework 绫诲悕绉帮細RoleDAO 绫绘弿杩帮細 鍒涘缓浜猴細huangx 鍒涘缓鏃堕棿锛?2015骞?1鏈?27鏃? 涓嬪崍7:09:58 淇敼浜猴細huangx
- * 淇敼鏃堕棿锛?2015骞?1鏈?27鏃? 涓嬪崍7:09:58 淇敼澶囨敞锛?
+ * 项目名称：base_spring_framework 类名称：RoleDAO 类描述： 创建人：huangx 创建时间：2015年1月27日 下午7:09:58 修改人：huangx
+ * 修改时间：2015年1月27日 下午7:09:58 修改备注：
  * 
  * @version
  * 
@@ -22,7 +22,7 @@ public interface RoleDAO {
   /**
    * 
    * @Title: insertRole
-   * @Description: 鏂板瑙掕壊
+   * @Description: 新增角色
    * @param: role
    * @return
    * @throws
@@ -33,7 +33,7 @@ public interface RoleDAO {
   /**
    * 
    * @Title: updateRole
-   * @Description: 淇敼瑙掕壊
+   * @Description: 修改角色
    * @param: role
    * @return
    * @throws
@@ -43,8 +43,8 @@ public interface RoleDAO {
   /**
    * 
    * @Title: updateRoleState
-   * @Description: 鏇存柊瑙掕壊鐘舵??
-   * @param: tempMap [id:roleId,state:瑙掕壊鐘舵?乚
+   * @Description: 更新角色状态
+   * @param: tempMap [id:roleId,state:角色状态]
    * @return
    * @throws
    */
@@ -53,9 +53,9 @@ public interface RoleDAO {
   /**
    * 
    * @Title: deleteRole
-   * @Description: 鍒犻櫎瑙掕壊
-   * @param: roleId 瑙掕壊id
-   * @return: void 杩斿洖绫诲瀷
+   * @Description: 删除角色
+   * @param: roleId 角色id
+   * @return: void 返回类型
    * @throws
    */
   public void deleteRole(Integer roleId);
@@ -63,9 +63,9 @@ public interface RoleDAO {
   /**
    * 
    * @Title: deleteFunctionRole
-   * @Description: 鍒犻櫎瑙掕壊鍔熻兘鍏宠仈琛?
-   * @param: roleId 瑙掕壊id
-   * @return: void 杩斿洖绫诲瀷
+   * @Description: 删除角色功能关联表
+   * @param: roleId 角色id
+   * @return: void 返回类型
    * @throws
    */
   public void deleteFunctionRole(Integer roleId);
@@ -73,9 +73,9 @@ public interface RoleDAO {
   /**
    * 
    * @Title: findAllEffectiveRole
-   * @Description: 鏌ヨ鎵?鏈夋湁鏁堢殑瑙掕壊
-   * @param: 璁惧畾鏂囦欢
-   * @return: List<Role> 杩斿洖绫诲瀷
+   * @Description: 查询所有有效的角色
+   * @param: 设定文件
+   * @return: List<Role> 返回类型
    * @throws
    */
   public List<Role> findAllEffectiveRoles();
@@ -83,9 +83,9 @@ public interface RoleDAO {
   /**
    * 
    * @Title: findRolesByLoginName
-   * @Description: 鏍规嵁鐧婚檰鍚嶆煡璇㈣鑹?
+   * @Description: 根据登陆名查询角色
    * @param: loginName
-   * @return: List<Role> 杩斿洖绫诲瀷
+   * @return: List<Role> 返回类型
    * @throws
    */
   public List<Role> findRolesByLoginName(String loginName);
@@ -94,9 +94,9 @@ public interface RoleDAO {
   /**
    * 
    * @Title: findRolesByFunctIonId
-   * @Description: 鏍规嵁functionId鏌ヨroleId
-   * @param: functionId 鍔熻兘ID
-   * @return: List<Integer> 杩斿洖绫诲瀷
+   * @Description: 根据functionId查询roleId
+   * @param: functionId 功能ID
+   * @return: List<Integer> 返回类型
    * @throws
    */
   public List<Integer> findRolesByFunctIonId(Integer functionId);
@@ -104,9 +104,9 @@ public interface RoleDAO {
   /**
    * 
    * @Title: findRoleList
-   * @Description: 鏌ヨ鎵?鏈夎鑹?
-   * @param: tempMap [roleName:瑙掕壊鍚嶇О]
-   * @return: List<Role> 杩斿洖绫诲瀷
+   * @Description: 查询所有角色
+   * @param: tempMap [roleName:角色名称]
+   * @return: List<Role> 返回类型
    * @throws
    */
   public List<Role> findRoleList(Map<String, Object> tempMap);
@@ -115,9 +115,9 @@ public interface RoleDAO {
   /**
    * 
    * @Title: findRoleById
-   * @Description: 鏍规嵁roleId鏌ヨ瑙掕壊淇℃伅
-   * @param: roleId 瑙掕壊id
-   * @return: Role 杩斿洖绫诲瀷
+   * @Description: 根据roleId查询角色信息
+   * @param: roleId 角色id
+   * @return: Role 返回类型
    * @throws
    */
   public Role findRoleById(Integer roleId);
@@ -126,21 +126,21 @@ public interface RoleDAO {
   /**
    * 
   * @Title: findRoleByRoleName
-  * @Description: 鏍规嵁roleName鏌ヨ瑙掕壊淇℃伅
+  * @Description: 根据roleName查询角色信息
   * @param @param roleName
   * @param @return
-  * @return List<Role>    杩斿洖绫诲瀷
+  * @return List<Role>    返回类型
   * @throws
    */
 
   public List<Role> findRoleByRoleName(String roleName);
   /**
-   * 鏍规嵁瑙掕壊鍒犻櫎鍔熻兘
+   * 根据角色删除功能
    * @param roleId
    */
   public void deleteRoleFunction(@Param("roleId")int roleId);
   /**
-   * 鎻掑叆瑙掕壊鍔熻兘琛?
+   * 插入角色功能表
    * @param roleId
    * @param functionId
    */
