@@ -43,8 +43,9 @@ public class MyUserDetailServiceImpl implements UserDetailsService {
 	 * 并返回User放到spring的全局缓存SecurityContextHolder中，以供授权器使用
 	 */
 	public UserDetails loadUserByUsername(String loginName) throws UsernameNotFoundException {
-		User user = null;
-		List<User> list = userDao.findUserByLoginName(loginName);
+		User user = new User();
+		user.setLoginName(loginName);
+		List<User> list = userDao.findUser(user);
 		if (list != null && list.size() != 0)
 			user = list.get(0);
 		Collection<GrantedAuthority> grantedAuths = obtionGrantedAuthorities(user);

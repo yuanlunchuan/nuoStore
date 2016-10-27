@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<% String baseUrl = request.getContextPath(); %>
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -16,11 +17,11 @@
 		    <h3 class="panel-title">用户登录</h3>
 		  </div>
 		  <div class="panel-body">
-		    <form action="/spring1/sessions/" method="post" class="form-horizontal">
+		    <form action="<%=baseUrl%>/sessions/" method="post" class="form-horizontal">
 		      <div class="form-group">
 		        <label class="col-md-2 control-label">用户名</label>
 		        <div class="col-md-10">
-		          <input class="form-control" type="text" name="userName">
+		          <input class="form-control" type="text" name="loginName">
 		        </div>
 		      </div>
 		      <div class="form-group">

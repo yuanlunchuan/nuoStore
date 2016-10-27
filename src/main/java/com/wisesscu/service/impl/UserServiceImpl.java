@@ -1,37 +1,35 @@
 package com.wisesscu.service.impl;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wisesscu.dao.IUserDao;
+import com.wisesscu.dao.UserDao;
 import com.wisesscu.pojo.User;
 import com.wisesscu.service.IUserService;
 
-@Service(value="userService")
+@Service(value = "userService")
 public class UserServiceImpl implements IUserService {
 	@Autowired
-	private IUserDao userDao;
+	private UserDao userDao;
 
-	public User getUserById(int userId) {
-		return this.userDao.selectByPrimaryKey(userId);
-	}
-
-	public int save(User user){
-		return this.userDao.insert(user);
+	public List<User> find(User user) {
+		return this.userDao.findUser(user);
 	}
 
-	public ArrayList<User> all() {
-		return this.userDao.all();
+	public List<User> all() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	public int destroy(int userId){
-		return this.userDao.deleteByPrimaryKey(userId);
+
+	public int destroy(User user) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	public int update(User user){
-		return this.userDao.updateByPrimaryKeySelective(user);
-	}
-	public ArrayList<User> getUserByName(String userName){
-		return this.userDao.getUserByName(userName);
+
+	public int update(User user) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

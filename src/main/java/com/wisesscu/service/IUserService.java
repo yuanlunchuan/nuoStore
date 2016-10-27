@@ -1,14 +1,12 @@
 package com.wisesscu.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.wisesscu.pojo.User;
 
 public interface IUserService {
-	User getUserById(int userId);
-	int save(User user);
-	ArrayList<User> all();
-	int destroy(int userId);
+	List<User> find(User user);
+	List<User> all();
+	int destroy(User user);
 	int update(User user);
-	ArrayList<User> getUserByName(String userName);
 }

@@ -1,5 +1,7 @@
 package com.wisesscu.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,10 @@ public class SitesController {
 	@RequestMapping("")
 	public String index(ModelMap model, HttpSession httpSession){
 		int userId = (Integer) httpSession.getAttribute("userId");
-		User user = this.userService.getUserById(userId);
-		model.addAttribute("user", user);
+		User user = new User();
+		user.setId(userId);
+		List<User> users = this.userService.find(user);
+		model.addAttribute("user", users.get(0));
 
 		return "sites/sites";
 	}

@@ -38,12 +38,12 @@ public class UserController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelMap model) {
-		ArrayList<User> users = new ArrayList<User>();
+		List<User> users = new ArrayList<User>();
 		users = this.userService.all();
 		model.addAttribute("users", users);
 		return new ModelAndView("users/index");
 	}
-	
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> listAllUsers() {
 		List<User> users = this.userService.all();
@@ -54,21 +54,27 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public ModelAndView show(ModelMap model, @PathVariable String userId) {
-		model.addAttribute("user", this.userService.getUserById(Integer.parseInt(userId)));
+	public ModelAndView show(ModelMap model, @PathVariable int userId) {
+		User user = new User();
+		user.setId(userId);
+		model.addAttribute("user", this.userService.find(user));
 		
 		return new ModelAndView("users/show");
 	}
 	
 	@RequestMapping(value = "/{userId}/edit", method = RequestMethod.GET)
-	public ModelAndView edit(ModelMap model, @PathVariable String userId) {
-		model.addAttribute("user", this.userService.getUserById(Integer.parseInt(userId)));
+	public ModelAndView edit(ModelMap model, @PathVariable int userId) {
+		User user = new User();
+		user.setId(userId);
+		model.addAttribute("user", this.userService.find(user));
 		return new ModelAndView("users/edit");
 	}
 	
 	@RequestMapping(value = "/{userId}", method = RequestMethod.POST, params = "_method=DELETE")
-	public ModelAndView destroy(ModelMap model, @PathVariable String userId) {
-		this.userService.destroy(Integer.parseInt(userId));
+	public ModelAndView destroy(ModelMap model, @PathVariable int userId) {
+		User user = new User();
+		user.setId(userId);
+		this.userService.destroy(user);
 		return new ModelAndView("redirect:/users/");
 	}
 	
