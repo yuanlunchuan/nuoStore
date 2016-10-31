@@ -50,7 +50,7 @@ public class HelloWorldController {
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "redirect:/security/login?logout";
+		return "redirect:/login?logout";
 	}
 	
 	private String getPrincipal() {
