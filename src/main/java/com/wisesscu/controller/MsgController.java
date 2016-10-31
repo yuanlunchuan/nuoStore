@@ -25,8 +25,8 @@ import com.wisesscu.websocket.MyWebSocketHandler;
 @RequestMapping("/msg")
 public class MsgController {
 	
-	@Autowired
-	MyWebSocketHandler	handler;
+	//@Autowired
+	//MyWebSocketHandler	handler;
 	
 	Map<Long, User>			users	= new HashMap<Long, User>();
 	
@@ -81,6 +81,6 @@ public class MsgController {
 		msg.setFromName("ϵͳ�㲥");
 		msg.setTo(0L);
 		msg.setText(text);
-		handler.broadcast(new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
+		//handler.broadcast(new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
 	}
 }
