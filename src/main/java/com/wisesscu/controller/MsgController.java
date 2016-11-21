@@ -7,26 +7,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.socket.TextMessage;
 
-import com.google.gson.GsonBuilder;
 import com.wisesscu.entity.Message;
 import com.wisesscu.entity.User;
-import com.wisesscu.websocket.MyWebSocketHandler;
 
 @Controller
 @RequestMapping("/msg")
 public class MsgController {
-	
-	//@Autowired
-	//MyWebSocketHandler	handler;
 	
 	Map<Long, User>			users	= new HashMap<Long, User>();
 	
@@ -46,34 +39,35 @@ public class MsgController {
 	}
 	
 	// 用户登录
-	@RequestMapping(value = "login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView doLogin(User user, HttpServletRequest request) {
+		System.out.println("-----------run in post method");
 		request.getSession().setAttribute("uid", user.getId());
 		request.getSession().setAttribute("name", users.get(user.getId()).getName());
-		return new ModelAndView("redirect:/msg/talk");
+		return new ModelAndView("redirect:/websocket/talk");
 	}
 
 	// 跳转到登陆页面
-	@RequestMapping(value = "login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView newLoginPage() {
 		return new ModelAndView("websocket/login");
 	}
 
 	// 跳转到交谈聊天页面
-	@RequestMapping(value = "talk", method = RequestMethod.GET)
+	@RequestMapping(value = "/talk", method = RequestMethod.GET)
 	public ModelAndView talk() {
 		return new ModelAndView("websocket/talk");
 	}
 	
 	// 跳转到发布广播页面
-	@RequestMapping(value = "broadcast", method = RequestMethod.GET)
+	@RequestMapping(value = "/broadcast", method = RequestMethod.GET)
 	public ModelAndView broadcast() {
 		return new ModelAndView("websocket/broadcast");
 	}
 	
 	// 发布系统广播（群发）
 	@ResponseBody
-	@RequestMapping(value = "broadcast", method = RequestMethod.POST)
+	@RequestMapping(value = "/broadcast", method = RequestMethod.POST)
 	public void broadcast(String text) throws IOException {
 		Message msg = new Message();
 		msg.setDate(new Date());
@@ -81,6 +75,5 @@ public class MsgController {
 		msg.setFromName("系统广播");
 		msg.setTo(0L);
 		msg.setText(text);
-		//handler.broadcast(new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
 	}
 }

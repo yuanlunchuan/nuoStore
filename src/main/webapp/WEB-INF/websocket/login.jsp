@@ -14,7 +14,10 @@
     用户名: <select name="id">
       <option value="1">张三</option>
       <option value="2">李四</option>
-    </select><br> 密码: <input name="password" type="text" value="123456"> <input type="submit" value="登录">
+    </select><br> 姓名: <input name="name" type="text" value="123456">
+    <br>
+    密码: <input name="password" type="text" value="123456">
+    <input type="submit" value="登录">
   </form>
 </body>
 
