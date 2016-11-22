@@ -31,7 +31,6 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(@RequestParam("userName") String userName, @RequestParam("password") String password,
 	    @RequestParam("age") int age, ModelMap model) {
-		System.out.println("-------------开始创建新用户： ");
 		model.addAttribute("userName", userName);
 		return new ModelAndView("redirect:/users/");
 	}
