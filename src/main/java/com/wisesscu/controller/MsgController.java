@@ -21,7 +21,7 @@ import com.wisesscu.entity.User;
 @RequestMapping("/msg")
 public class MsgController {
 	
-	Map<Long, User>			users	= new HashMap<Long, User>();
+	Map<Long, User> users = new HashMap<Long, User>();
 	
 	// 模拟一些数据
 	@ModelAttribute
@@ -35,7 +35,6 @@ public class MsgController {
 		u2.setId(2L);
 		u2.setName("李四");
 		users.put(u2.getId(), u2);
-		
 	}
 	
 	// 用户登录
@@ -44,15 +43,24 @@ public class MsgController {
 		System.out.println("-----------run in post method");
 		request.getSession().setAttribute("uid", user.getId());
 		request.getSession().setAttribute("name", users.get(user.getId()).getName());
-		return new ModelAndView("redirect:/websocket/talk");
+		return new ModelAndView("redirect:/msg/talk");
 	}
-
+	
+	// 用户登录
+	@RequestMapping(value = "/logins", method = RequestMethod.GET)
+	public ModelAndView doLogins(User user, HttpServletRequest request) {
+		System.out.println("-----------run in post method");
+		request.getSession().setAttribute("uid", user.getId());
+		request.getSession().setAttribute("name", users.get(user.getId()).getName());
+		return new ModelAndView("redirect:/msg/talk");
+	}
+	
 	// 跳转到登陆页面
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView newLoginPage() {
 		return new ModelAndView("websocket/login");
 	}
-
+	
 	// 跳转到交谈聊天页面
 	@RequestMapping(value = "/talk", method = RequestMethod.GET)
 	public ModelAndView talk() {

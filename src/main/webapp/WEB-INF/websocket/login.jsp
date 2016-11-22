@@ -10,7 +10,8 @@
 <script type="text/javascript" src="<%=path%>/static/js/jquery.js"></script>
 </head>
 <body>
-  <form action="<%=path%>/msg/login" method="post">
+  <form action="/spring1/msg/login" method="POST">
+  <input type="hidden" name="CSRFToken" value="${csrf}" />
     用户名: <select name="id">
       <option value="1">张三</option>
       <option value="2">李四</option>
