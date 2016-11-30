@@ -46,15 +46,6 @@ public class MsgController {
 		return new ModelAndView("redirect:/msg/talk");
 	}
 	
-	// 用户登录
-	@RequestMapping(value = "/logins", method = RequestMethod.GET)
-	public ModelAndView doLogins(User user, HttpServletRequest request) {
-		System.out.println("-----------run in post method");
-		request.getSession().setAttribute("uid", user.getId());
-		request.getSession().setAttribute("name", users.get(user.getId()).getName());
-		return new ModelAndView("redirect:/msg/talk");
-	}
-	
 	// 跳转到登陆页面
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView newLoginPage() {
