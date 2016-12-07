@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<!DOCTYPEHTMLPUBLIC"-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>AccessDenied page</title>
+<title>My JSP 'admin.jsp' starting page</title>
 </head>
 <body>
-	Dear <strong>${user}</strong>, You are not authorized to access this page
-	<a href="<c:url value="/logout" />">Logout</a>
+  欢迎来到管理员页面.
+  <br>
 </body>
 </html>

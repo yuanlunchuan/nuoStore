@@ -20,8 +20,10 @@ public class HandShake implements HandshakeInterceptor {
 	
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 	    Map<String, Object> attributes) throws Exception {
+		
 		System.out.println("Websocket:用户[ID:"
 		    + ((ServletServerHttpRequest) request).getServletRequest().getSession(false).getAttribute("uid") + "]已经建立连接");
+		
 		if (request instanceof ServletServerHttpRequest) {
 			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
 			HttpSession session = servletRequest.getServletRequest().getSession(false);
