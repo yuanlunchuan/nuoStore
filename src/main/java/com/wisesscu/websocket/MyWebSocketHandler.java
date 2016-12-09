@@ -15,22 +15,21 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.wisesscu.entity.Message;
 
 @Component
 public class MyWebSocketHandler implements WebSocketHandler {
-	public static final Map<Long, WebSocketSession> userSocketSessionMap;
+	public static final Map<String, WebSocketSession> userSocketSessionMap;
 	
 	static {
-		userSocketSessionMap = new HashMap<Long, WebSocketSession>();
+		userSocketSessionMap = new HashMap<String, WebSocketSession>();
 	}
 	
 	/**
 	 * 建立连接后
 	 */
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		Long uid = (Long) session.getAttributes().get("uid");
+		String uid = (String) session.getAttributes().get("uid");
 		if (userSocketSessionMap.get(uid) == null) {
 			userSocketSessionMap.put(uid, session);
 		}
@@ -40,12 +39,13 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 * 消息处理，在客户端通过Websocket API发送的消息会经过这里，然后进行相应的处理
 	 */
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+		System.out.println("-------收到客户端的消息");
 		if (message.getPayloadLength() == 0)
 			return;
 		Message msg = new Gson().fromJson(message.getPayload().toString(), Message.class);
 		msg.setDate(new Date());
-		sendMessageToUser(msg.getTo(),
-		    new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
+		//sendMessageToUser(msg.getTo(),
+		//    new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
 	}
 	
 	/**
@@ -55,10 +55,10 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		if (session.isOpen()) {
 			session.close();
 		}
-		Iterator<Entry<Long, WebSocketSession>> it = userSocketSessionMap.entrySet().iterator();
+		Iterator<Entry<String, WebSocketSession>> it = userSocketSessionMap.entrySet().iterator();
 		// 移除Socket会话
 		while (it.hasNext()) {
-			Entry<Long, WebSocketSession> entry = it.next();
+			Entry<String, WebSocketSession> entry = it.next();
 			if (entry.getValue().getId().equals(session.getId())) {
 				userSocketSessionMap.remove(entry.getKey());
 				System.out.println("Socket会话已经移除:用户ID" + entry.getKey());
@@ -72,10 +72,10 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 */
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
 		System.out.println("Websocket:" + session.getId() + "已经关闭");
-		Iterator<Entry<Long, WebSocketSession>> it = userSocketSessionMap.entrySet().iterator();
+		Iterator<Entry<String, WebSocketSession>> it = userSocketSessionMap.entrySet().iterator();
 		// 移除Socket会话
 		while (it.hasNext()) {
-			Entry<Long, WebSocketSession> entry = it.next();
+			Entry<String, WebSocketSession> entry = it.next();
 			if (entry.getValue().getId().equals(session.getId())) {
 				userSocketSessionMap.remove(entry.getKey());
 				System.out.println("Socket会话已经移除:用户ID" + entry.getKey());
@@ -95,12 +95,12 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 * @throws IOException
 	 */
 	public void broadcast(final TextMessage message) throws IOException {
-		Iterator<Entry<Long, WebSocketSession>> it = userSocketSessionMap.entrySet().iterator();
+		Iterator<Entry<String, WebSocketSession>> it = userSocketSessionMap.entrySet().iterator();
 		
 		// 多线程群发
 		while (it.hasNext()) {
 			
-			final Entry<Long, WebSocketSession> entry = it.next();
+			final Entry<String, WebSocketSession> entry = it.next();
 			
 			if (entry.getValue().isOpen()) {
 				// entry.getValue().sendMessage(message);
@@ -122,7 +122,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		}
 	}
 
-	public void sendMessageToUser(Long uid, TextMessage message) throws IOException {
+	public void sendMessageToUser(String uid, TextMessage message) throws IOException {
 		WebSocketSession session = userSocketSessionMap.get(uid);
 		if (session != null && session.isOpen()) {
 			session.sendMessage(message);
