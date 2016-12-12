@@ -1,5 +1,5 @@
 var NstGradeObject = {
-  path: 'http://127.0.0.1:8080/spring1/',
+  path: 'http://127.0.0.1:8080/spring1',
   websocket: null,
   onWebSocketOpen: function(event){
     var self = NstGradeObject;

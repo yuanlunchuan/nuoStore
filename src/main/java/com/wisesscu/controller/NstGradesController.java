@@ -14,7 +14,7 @@ public class NstGradesController {
 	@RequestMapping("/show")
 	public String show(HttpSession session){
 		if(null==session.getAttribute("uid")){
-			session.setAttribute("uid", UUID.randomUUID());
+			session.setAttribute("uid", UUID.randomUUID().toString());
 		}
 		return "nstGrades/show";
 	}
