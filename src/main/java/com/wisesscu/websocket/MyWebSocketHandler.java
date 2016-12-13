@@ -15,6 +15,7 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.wisesscu.entity.Message;
 
 @Component
@@ -29,7 +30,6 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 * 建立连接后
 	 */
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("-----line 32-----");
 		String uid = (String) session.getAttributes().get("uid");
 		if (userSocketSessionMap.get(uid) == null) {
 			userSocketSessionMap.put(uid, session);
@@ -40,20 +40,22 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 * 消息处理，在客户端通过Websocket API发送的消息会经过这里，然后进行相应的处理
 	 */
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-		System.out.println("-------收到客户端的消息");
+		System.out.println("----------message.getPayload().toString(): " + message.getPayload().toString());
 		if (message.getPayloadLength() == 0)
 			return;
+		
 		Message msg = new Gson().fromJson(message.getPayload().toString(), Message.class);
 		msg.setDate(new Date());
-		//sendMessageToUser(msg.getTo(),
-		//    new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
+		sendMessageToUser(session,
+		    new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
+		
+		// sendMessageToUser(session, message.getPayload().toString());
 	}
 	
 	/**
 	 * 消息传输错误处理
 	 */
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		System.out.println("-------has error");
 		if (session.isOpen()) {
 			session.close();
 		}
@@ -120,12 +122,11 @@ public class MyWebSocketHandler implements WebSocketHandler {
 					
 				}).start();
 			}
-			
 		}
 	}
-
-	public void sendMessageToUser(String uid, TextMessage message) throws IOException {
-		WebSocketSession session = userSocketSessionMap.get(uid);
+	
+	public void sendMessageToUser(WebSocketSession session, TextMessage message) throws IOException {
+		// WebSocketSession session = userSocketSessionMap.get(uid);
 		if (session != null && session.isOpen()) {
 			session.sendMessage(message);
 		}
