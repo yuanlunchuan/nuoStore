@@ -4,12 +4,12 @@ var NewPageObject = {
 	initialize: function(){
 		var self = NewPageObject;
 		$('#sendButton').click(function(){
-	　　 $.post(self.path,
-	　　 {uid: $('#uid').val(),
-	　　  text: $('#monitorMessage').val()
-	    	}, 
-	    	function (text, status) {
-	    		console.info(text);
+      $.post(self.path,
+        {uid: $('#uid').val(),
+         text: $('#monitorMessage').val()
+        }, 
+        function (text, status) {
+         console.info(text);
 	    });
 		});
 	}	

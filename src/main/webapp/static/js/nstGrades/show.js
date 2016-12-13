@@ -9,7 +9,7 @@ var NstGradeObject = {
   },
   
   onRecieveMessage: function(event){
-  	$('#webSocketMessage').append(event.data+'------'+event.data+'<br>');
+  	$('#webSocketMessage').append(new Date()+'接收到的胎心数据为： '+event.data+'<br>');
   },
 
   onWebSocketError: function(event){

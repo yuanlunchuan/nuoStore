@@ -122,10 +122,15 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		}
 	}
 	
-	public void sendMessageToUser(WebSocketSession session, TextMessage message) throws IOException {
+	public static void sendMessageToUser(WebSocketSession session, TextMessage message) {
 		// WebSocketSession session = userSocketSessionMap.get(uid);
 		if (session != null && session.isOpen()) {
-			session.sendMessage(message);
+			try {
+				session.sendMessage(message);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
