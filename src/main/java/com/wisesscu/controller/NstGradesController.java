@@ -1,5 +1,6 @@
 package com.wisesscu.controller;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ public class NstGradesController {
 
 	@RequestMapping("/show")
 	public String show(HttpSession session){
+		System.out.println("----------new date()"+new Date().toString());
 		if(null==session.getAttribute("uid")){
 			session.setAttribute("uid", UUID.randomUUID().toString());
 		}

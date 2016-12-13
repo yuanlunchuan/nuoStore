@@ -29,6 +29,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 * 建立连接后
 	 */
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		System.out.println("-----line 32-----");
 		String uid = (String) session.getAttributes().get("uid");
 		if (userSocketSessionMap.get(uid) == null) {
 			userSocketSessionMap.put(uid, session);
@@ -52,6 +53,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 * 消息传输错误处理
 	 */
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+		System.out.println("-------has error");
 		if (session.isOpen()) {
 			session.close();
 		}
