@@ -23,13 +23,11 @@ public class HandShake implements HandshakeInterceptor {
 	    Map<String, Object> attributes) throws Exception {
 		
 		if (request instanceof ServletServerHttpRequest) {
-			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
-			HttpSession session = servletRequest.getServletRequest().getSession(false);
-			if (session != null) {
-				String uid = (String) session.getAttribute("uid");
-				System.out.println("---------uid: "+uid);
-				attributes.put("uid", uid);
-			}
+			HttpServletRequest servletRequest = ((ServletServerHttpRequest) request).getServletRequest();
+			String uid = ((ServletServerHttpRequest) request).getServletRequest().getParameter("uid");
+			
+			attributes.put("uid", uid);
+			servletRequest.getSession().setAttribute("uid", uid);
 		}
 		return true;
 	}

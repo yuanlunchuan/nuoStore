@@ -1,5 +1,5 @@
 var NstGradeObject = {
-  path: '127.0.0.1:8080/spring1',
+  path: 'localhost:8080/spring1',
   websocket: null,
 
   onWebSocketOpen: function(event){
@@ -9,7 +9,7 @@ var NstGradeObject = {
   },
   
   onRecieveMessage: function(event){
-  	$('#webSocketMessage').append(JSON.parse(event.data).date+'------'+JSON.parse(event.data).text+'<br>');
+  	$('#webSocketMessage').append(event.data+'------'+event.data+'<br>');
   },
 
   onWebSocketError: function(event){
@@ -33,6 +33,17 @@ var NstGradeObject = {
 		});
 	},
 	
+	onStartFetalMonitorButtonClicked: function(){
+		var self = NstGradeObject;
+
+		$.post('http://'+self.path+'/nstGrades/create',
+		{
+			uid: $('#user-id').data('user-id') },
+				function (text, status) {
+					console.info(text);
+     });
+	},
+	
   initialize: function(){
     var self = NstGradeObject;
     var uid = $('#user-id').data('user-id');
@@ -40,6 +51,7 @@ var NstGradeObject = {
     if ('WebSocket' in window) {
       self.websocket = new WebSocket("ws://" + self.path + "/ws?uid="+uid);
     } else if ('MozWebSocket' in window) {
+    	
       self.websocket = new MozWebSocket("ws://" + self.path + "/ws"+uid);
     } else {
       self.websocket = new SockJS("http://" + self.path + "/ws/sockjs"+uid);
@@ -50,6 +62,7 @@ var NstGradeObject = {
 		self.websocket.onclose = self.onWebSocketClose;
 		
 		$('#sendMessage').on('click', self.onSendMessageButtonClicked);
+		$('#startFetalMonitor').on('click', self.onStartFetalMonitorButtonClicked);
   }
 };
 

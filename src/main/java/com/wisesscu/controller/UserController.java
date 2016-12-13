@@ -3,6 +3,8 @@ package com.wisesscu.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,7 @@ public class UserController {
 	private IUserService userService;
 	
 	@RequestMapping("/new")
-	public ModelAndView newPage(ModelMap model) {
+	public ModelAndView newPage(ModelMap model, HttpSession session) {
 		return new ModelAndView("users/new");
 	}
 	

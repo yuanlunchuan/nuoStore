@@ -40,7 +40,6 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 * 消息处理，在客户端通过Websocket API发送的消息会经过这里，然后进行相应的处理
 	 */
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-		System.out.println("----------message.getPayload().toString(): " + message.getPayload().toString());
 		if (message.getPayloadLength() == 0)
 			return;
 		
@@ -48,8 +47,6 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		msg.setDate(new Date());
 		sendMessageToUser(session,
 		    new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
-		
-		// sendMessageToUser(session, message.getPayload().toString());
 	}
 	
 	/**
